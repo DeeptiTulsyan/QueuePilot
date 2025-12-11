@@ -3,47 +3,98 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* NAVBAR */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
-    background-color: #f8f5e4;
+    background-color: #e0dbbe; /* vanilla cream */
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1b1f3b;
+    color: #2a3eae; /* new blue */
 }
+
 .navLinks {
     display: flex;
     gap: 30px;
     list-style: none;
 }
+
 .navLinks a {
     text-decoration: none;
-    color: #1b1f3b;
+    color:#2a3eae; /* new blue */
     font-size: 1.1rem;
     font-weight: 500;
     transition: 0.3s ease;
 }
+
 .navLinks a:hover {
-    color: #4b57d9;
+    color: #5C6BC0; /* slightly lighter blue */
 }
+
 .auth a {
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #1b1f3b; 
+    background-color: #2a3eae; /* new blue */
     color: #f8f5e4;
     border-radius: 6px;
     font-size: 1rem;
     font-weight: 600;
     transition: 0.3s ease;
 }
+
 .auth a:hover {
-    background-color: #4b57d9;
+    background-color: #5C6BC0; /* lighter hover */
 }
 
+/* HERO SECTION */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 80px;
+    background-color: #F8F3E6; /* cream variant */
+}
 
+.hero-content {
+    max-width: 50%;
+}
+.hero-image img {
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
 
+.hero h1 {
+    font-size: 3rem;
+    color: #2a3eae; /* new blue */
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #3F51B5; /* new blue */
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #5C6BC0; /* lighter hover */
+}
