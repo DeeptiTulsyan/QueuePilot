@@ -3,33 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QueuePilot Index Page</title>
+
+    <title>QueuePilot | Smart Queue Management System</title>
+    <meta name="description" content="QueuePilot is a smart queue management system that helps hospitals and businesses reduce waiting time through online token generation and real-time tracking.">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            QueuePilot
-        </div>
-        <ul class="navLinks">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact Us</a></li>
-        </ul>
-        <div class="auth">
-        <a href="#">Sign In</a>
-        </div>
-    </nav>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Manage Queues Seamlessly</h1>
-            <p>QueuePilot helps hospitals and businesses reduce waiting time by offering online token generation and real-time queue tracking.</p>
-            <a href="#" class="cta-btn">Sign Up</a>
-        </div>
-        <div class="hero-image">
-            <img src="QueueManagement.jpg" alt="Queue Management">
-        </div>
-    </section>
+
+    <!-- HEADER: Branding + Primary Navigation -->
+    <header>
+        <nav class="navbar" aria-label="Primary Navigation">
+            <div class="logo">
+                <a href="index.html">QueuePilot</a>
+            </div>
+
+            <ul class="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+
+            <div class="auth">
+                <a href="signin.html">Sign In</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN: Core page content -->
+    <main id="home">
+
+        <!-- HERO SECTION -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">Manage Queues Seamlessly</h1>
+                <p>
+                    QueuePilot helps hospitals and businesses reduce waiting time
+                    through online token generation and real-time queue tracking.
+                </p>
+                <a href="signup.html" class="cta-btn">Get Started</a>
+            </div>
+
+            <figure class="hero-image">
+                <img src="QueueManagement.jpg" alt="Digital queue management system illustration">
+            </figure>
+        </section>
+
+    </main>
+    <section class="about" id="about">
+    <header class="about-header">
+        <h2>About QueuePilot</h2>
+        <p>Smart queue management designed for modern healthcare systems.</p>
+    </header>
+
+    <article class="about-content">
+        <p>
+            QueuePilot is a digital queue management platform that helps hospitals
+            eliminate long waiting lines by allowing patients to book appointments
+            online and receive real-time token updates.
+        </p>
+
+        <p>
+            By analyzing average consultation time per doctor, QueuePilot intelligently
+            estimates waiting time for each patient, ensuring better time management
+            for both hospitals and visitors.
+        </p>
+    </article>
+</section>
+
 </body>
 </html>
