@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Sign In | QueuePilot</title>
+  <meta name="description" content="Sign in to QueuePilot to manage your appointments and queue tokens.">
+
   <link rel="stylesheet" href="css/signin.css">
 </head>
 <body>
 
 <main class="signin-container">
 
-  <!-- LEFT: IMAGE (visual only) -->
+  <!-- LEFT: IMAGE (decorative only) -->
   <section class="signin-visual" aria-hidden="true">
     <img src="img/signin_image.png" alt="">
   </section>
@@ -20,15 +23,31 @@
     <h1>Sign In</h1>
     <p>Welcome back to QueuePilot</p>
 
-    <form>
+    <form id="signin-form" novalidate>
+
       <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" id="email" required>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          aria-describedby="email-error"
+        >
+        <small id="email-error" class="error-message" aria-live="polite"></small>
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" required>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          minlength="6"
+          aria-describedby="password-error"
+        >
+        <small id="password-error" class="error-message" aria-live="polite"></small>
       </div>
 
       <div class="form-extra">
@@ -36,10 +55,12 @@
       </div>
 
       <button type="submit">Sign In</button>
+
     </form>
   </section>
 
 </main>
 
+<script src="js/signin.js" defer></script>
 </body>
 </html>
