@@ -1,0 +1,124 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #f8f5e4;
+}
+
+/* CONTAINER */
+.signup-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* IMAGE */
+.signup-visual {
+  flex: 1;
+  background-color: #e0dbbe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-visual img {
+  width: 80%;
+  max-width: 420px;
+}
+
+/* FORM */
+.signup-form {
+  flex: 1;
+  background: #fff;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-form h1 {
+  font-size: 2.2rem;
+  color: #3F51B5;
+  margin-bottom: 10px;
+}
+
+.signup-form p {
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+input[aria-invalid="true"] {
+  border-color: #d32f2f;
+}
+
+.error {
+  font-size: 0.85rem;
+  color: #d32f2f;
+  min-height: 16px;
+  display: block;
+  margin-top: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #3F51B5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5C6BC0;
+}
+
+.form-footer {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.form-footer a {
+  color: #3F51B5;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+  }
+
+  .signup-visual {
+    display: none;
+  }
+
+  .signup-form {
+    padding: 40px 30px;
+  }
+}
