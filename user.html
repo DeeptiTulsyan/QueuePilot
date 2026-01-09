@@ -22,7 +22,7 @@
 
   <!-- WELCOME -->
   <section class="welcome">
-    <h1>Welcome, Deepti 👋</h1>
+    <h1>Welcome, <span id="username">Deepti</span> 👋</h1>
     <p>Your queue status is shown below</p>
   </section>
 
@@ -31,17 +31,17 @@
 
     <article class="status-card">
       <h3>Your Token</h3>
-      <p class="big">A-17</p>
+      <p class="big" id="token-number">A-17</p>
     </article>
 
     <article class="status-card">
       <h3>Estimated Wait</h3>
-      <p class="big">25 mins</p>
+      <p class="big"><span id="eta">25</span> mins</p>
     </article>
 
     <article class="status-card">
       <h3>People Ahead</h3>
-      <p class="big">4</p>
+      <p class="big" id="people-ahead">4</p>
     </article>
 
   </section>
@@ -53,14 +53,17 @@
     <ul>
       <li><strong>Department:</strong> General Medicine</li>
       <li><strong>Doctor:</strong> Dr. Sharma</li>
-      <li><strong>Status:</strong> Waiting</li>
+      <li>
+        <strong>Status:</strong>
+        <span id="queue-status">Waiting</span>
+      </li>
     </ul>
   </section>
 
   <!-- ACTIONS -->
   <section class="actions">
-    <button class="secondary">Refresh Status</button>
-    <button class="danger">Cancel Token</button>
+    <button class="secondary" id="refresh-btn">Refresh Status</button>
+    <button class="danger" id="cancel-btn">Cancel Token</button>
   </section>
 
 </main>
@@ -69,5 +72,6 @@
   <p>© 2025 QueuePilot</p>
 </footer>
 
+<script src="js/user.js"></script>
 </body>
 </html>
