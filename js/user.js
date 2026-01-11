@@ -1,4 +1,9 @@
 // Simulated user queue data (later comes from backend)
+const session = JSON.parse(localStorage.getItem("queuepilotUser"));
+
+if (!session || session.loggedIn !== true || session.role !== "user") {
+  window.location.href = "signin.html";
+}
 const queueData = {
   username: "Deepti",
   token: "A-17",
@@ -56,3 +61,7 @@ function simulateQueueProgress() {
     queueData.status = "Now Serving";
   }
 }
+document.querySelector(".logout").addEventListener("click", () => {
+  localStorage.removeItem("queuepilotUser");
+  window.location.href = "signin.html";
+});
