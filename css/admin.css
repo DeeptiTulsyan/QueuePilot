@@ -134,3 +134,25 @@ body {
     flex-direction: column;
   }
 }
+.queue-info p {
+  margin: 6px 0;
+}
+
+.queue-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.queue-actions button {
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.queue-actions .danger {
+  background-color: #e74c3c;
+  color: white;
+}

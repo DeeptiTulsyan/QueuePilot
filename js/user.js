@@ -1,18 +1,11 @@
-// Simulated user queue data (later comes from backend)
+// AUTH CHECK
 const session = JSON.parse(localStorage.getItem("queuepilotUser"));
 
 if (!session || session.loggedIn !== true || session.role !== "user") {
   window.location.href = "signin.html";
 }
-const queueData = {
-  username: "Deepti",
-  token: "A-17",
-  eta: 25,
-  peopleAhead: 4,
-  status: "Waiting"
-};
 
-// DOM elements
+// DOM ELEMENTS
 const usernameEl = document.getElementById("username");
 const tokenEl = document.getElementById("token-number");
 const etaEl = document.getElementById("eta");
@@ -22,46 +15,51 @@ const statusEl = document.getElementById("queue-status");
 const refreshBtn = document.getElementById("refresh-btn");
 const cancelBtn = document.getElementById("cancel-btn");
 
-// Initial render
-renderQueue();
+// LOAD QUEUE FROM STORAGE
+function loadQueue() {
+  const queue = JSON.parse(localStorage.getItem("queuepilotQueue"));
 
-// Refresh button logic
+  if (!queue) {
+    statusEl.textContent = "No active queue";
+    refreshBtn.disabled = true;
+    cancelBtn.disabled = true;
+    return;
+  }
+
+  usernameEl.textContent = session.username;
+  tokenEl.textContent = queue.currentToken;
+  etaEl.textContent = queue.eta;
+  peopleAheadEl.textContent = queue.peopleAhead;
+  statusEl.textContent = queue.status;
+
+  if (queue.status === "CANCELLED") {
+    refreshBtn.disabled = true;
+    cancelBtn.disabled = true;
+  }
+}
+
+// REFRESH BUTTON (READ ONLY)
 refreshBtn.addEventListener("click", () => {
-  simulateQueueProgress();
-  renderQueue();
+  loadQueue();
 });
 
-// Cancel token logic
+// USER CANCEL REQUEST (FLAG ONLY)
 cancelBtn.addEventListener("click", () => {
-  queueData.status = "Cancelled";
-  queueData.peopleAhead = 0;
-  queueData.eta = 0;
-  renderQueue();
+  const queue = JSON.parse(localStorage.getItem("queuepilotQueue"));
+  if (!queue) return;
 
-  refreshBtn.disabled = true;
+  queue.status = "CANCEL REQUESTED";
+  localStorage.setItem("queuepilotQueue", JSON.stringify(queue));
+
+  statusEl.textContent = "Cancel requested";
   cancelBtn.disabled = true;
 });
 
-// Functions
-function renderQueue() {
-  usernameEl.textContent = queueData.username;
-  tokenEl.textContent = queueData.token;
-  etaEl.textContent = queueData.eta;
-  peopleAheadEl.textContent = queueData.peopleAhead;
-  statusEl.textContent = queueData.status;
-}
-
-function simulateQueueProgress() {
-  if (queueData.peopleAhead > 0) {
-    queueData.peopleAhead -= 1;
-    queueData.eta -= 5;
-  }
-
-  if (queueData.peopleAhead === 0) {
-    queueData.status = "Now Serving";
-  }
-}
+// LOGOUT
 document.querySelector(".logout").addEventListener("click", () => {
   localStorage.removeItem("queuepilotUser");
   window.location.href = "signin.html";
 });
+
+// INITIAL LOAD
+loadQueue();
