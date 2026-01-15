@@ -37,6 +37,10 @@ function loadQueue() {
     cancelBtn.disabled = true;
   }
 }
+// AUTO-REFRESH every 5 seconds
+setInterval(() => {
+  loadQueue();
+}, 5000);
 
 // REFRESH BUTTON (READ ONLY)
 refreshBtn.addEventListener("click", () => {
