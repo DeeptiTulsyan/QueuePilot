@@ -77,3 +77,30 @@ cancelBtn.addEventListener("click", () => {
   // existing logic
   loadQueue();
 });
+const tokenList = document.getElementById("token-list");
+const serveTokenBtn = document.getElementById("serve-token");
+
+function renderTokens() {
+  const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
+
+  tokenList.innerHTML = "";
+
+  tokens.forEach(t => {
+    const li = document.createElement("li");
+    li.textContent = `${t.token} - ${t.name} (${t.status})`;
+    tokenList.appendChild(li);
+  });
+}
+
+serveTokenBtn.addEventListener("click", () => {
+  const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
+
+  const next = tokens.find(t => t.status === "WAITING");
+  if (!next) return alert("No tokens waiting");
+
+  next.status = "NOW_SERVING";
+  localStorage.setItem("queuepilotTokens", JSON.stringify(tokens));
+  renderTokens();
+});
+
+renderTokens();

@@ -67,3 +67,38 @@ document.querySelector(".logout").addEventListener("click", () => {
 
 // INITIAL LOAD
 loadQueue();
+const generateBtn = document.getElementById("generate-token");
+
+generateBtn.addEventListener("click", () => {
+  const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
+
+  const nextNumber = tokens.length + 1;
+  const newToken = `A-${nextNumber}`;
+
+  const newEntry = {
+    token: newToken,
+    name: session.username,
+    status: "WAITING"
+  };
+
+  tokens.push(newEntry);
+  localStorage.setItem("queuepilotTokens", JSON.stringify(tokens));
+
+  localStorage.setItem("userToken", newToken);
+
+  alert(`Your token is ${newToken}`);
+  loadQueuePosition();
+});
+function loadQueuePosition() {
+  const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
+  const myToken = localStorage.getItem("userToken");
+
+  if (!myToken) return;
+
+  const index = tokens.findIndex(t => t.token === myToken);
+  const peopleAhead = index;
+
+  document.getElementById("token-number").textContent = myToken;
+  document.getElementById("people-ahead").textContent = peopleAhead;
+}
+loadQueuePosition();
