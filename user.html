@@ -22,7 +22,7 @@
 
   <!-- WELCOME -->
   <section class="welcome">
-    <h1>Welcome, <span id="username">Deepti</span> 👋</h1>
+    <h1>Welcome, <span id="username">User</span> 👋</h1>
     <p>Your queue status is shown below</p>
   </section>
 
@@ -31,17 +31,17 @@
 
     <article class="status-card">
       <h3>Your Token</h3>
-      <p class="big" id="token-number">A-17</p>
+      <p class="big" id="token-number">--</p>
     </article>
 
     <article class="status-card">
       <h3>Estimated Wait</h3>
-      <p class="big"><span id="eta">25</span> mins</p>
+      <p class="big"><span id="eta">--</span> mins</p>
     </article>
 
     <article class="status-card">
       <h3>People Ahead</h3>
-      <p class="big" id="people-ahead">4</p>
+      <p class="big" id="people-ahead">--</p>
     </article>
 
   </section>
@@ -55,17 +55,15 @@
       <li><strong>Doctor:</strong> Dr. Sharma</li>
       <li>
         <strong>Status:</strong>
-        <span id="queue-status">Waiting</span>
+        <span id="queue-status">Not in queue</span>
       </li>
     </ul>
   </section>
 
   <!-- ACTIONS -->
   <section class="actions">
-    <button class="secondary" id="refresh-btn">Refresh Status</button>
-    <button class="danger" id="cancel-btn">Cancel Token</button>
     <button id="generate-token" class="secondary">Join Queue</button>
-
+    <button id="cancel-btn" class="danger">Cancel Token</button>
   </section>
 
 </main>
