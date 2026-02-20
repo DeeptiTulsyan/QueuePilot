@@ -15,6 +15,11 @@ const statusEl = document.getElementById("queue-status");
 const generateBtn = document.getElementById("generate-token");
 const cancelBtn = document.getElementById("cancel-btn");
 
+// Ensure queue array exists
+if (!localStorage.getItem("queuepilotTokens")) {
+  localStorage.setItem("queuepilotTokens", JSON.stringify([]));
+}
+
 // ================= RENDER =================
 function renderUserQueue() {
   const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
@@ -22,27 +27,54 @@ function renderUserQueue() {
 
   usernameEl.textContent = session.name || "User";
 
+  // If user not in queue
   if (!myToken) {
     tokenEl.textContent = "--";
     peopleAheadEl.textContent = "--";
     etaEl.textContent = "--";
     statusEl.textContent = "Not in queue";
+
+    generateBtn.disabled = false;
+    cancelBtn.disabled = true;
     return;
   }
 
-  const index = tokens.findIndex(t => t.token === myToken);
+  const myEntry = tokens.find(t => t.token === myToken);
 
-  if (index === -1) {
+  if (!myEntry) {
     statusEl.textContent = "Token expired";
+    localStorage.removeItem("userToken");
+    generateBtn.disabled = false;
+    cancelBtn.disabled = true;
     return;
   }
 
-  const myEntry = tokens[index];
+  // If completed → auto release
+  if (myEntry.status === "COMPLETED") {
+    statusEl.textContent = "Consultation completed";
+    localStorage.removeItem("userToken");
+
+    tokenEl.textContent = "--";
+    peopleAheadEl.textContent = "--";
+    etaEl.textContent = "--";
+
+    generateBtn.disabled = false;
+    cancelBtn.disabled = true;
+    return;
+  }
+
+  // Proper queue position calculation
+  const waitingTokens = tokens.filter(t => t.status === "WAITING");
+  const peopleAhead = waitingTokens.findIndex(t => t.token === myToken);
 
   tokenEl.textContent = myEntry.token;
-  peopleAheadEl.textContent = index;
-  etaEl.textContent = index * 5;
+  peopleAheadEl.textContent = peopleAhead >= 0 ? peopleAhead : 0;
+  etaEl.textContent = peopleAhead >= 0 ? peopleAhead * 5 : 0;
   statusEl.textContent = myEntry.status;
+
+  // Button state logic
+  generateBtn.disabled =
+    myEntry.status === "WAITING" || myEntry.status === "NOW_SERVING";
 
   cancelBtn.disabled = myEntry.status !== "WAITING";
 }
@@ -51,7 +83,6 @@ function renderUserQueue() {
 generateBtn.addEventListener("click", () => {
   let tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
 
-  // Prevent duplicate token
   if (localStorage.getItem("userToken")) return;
 
   const nextToken = `A-${tokens.length + 1}`;
@@ -79,6 +110,7 @@ cancelBtn.addEventListener("click", () => {
 
   localStorage.setItem("queuepilotTokens", JSON.stringify(tokens));
   localStorage.removeItem("userToken");
+
   renderUserQueue();
 });
 

@@ -9,6 +9,11 @@ if (!session || session.loggedIn !== true || session.role !== "admin") {
 const tokenList = document.getElementById("token-list");
 const serveTokenBtn = document.getElementById("serve-token");
 
+// Ensure queue array exists
+if (!localStorage.getItem("queuepilotTokens")) {
+  localStorage.setItem("queuepilotTokens", JSON.stringify([]));
+}
+
 // ================= RENDER TOKENS =================
 function renderTokens() {
   const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
@@ -29,7 +34,7 @@ function renderTokens() {
 
 // ================= SERVE NEXT =================
 serveTokenBtn.addEventListener("click", () => {
-  const tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
+  let tokens = JSON.parse(localStorage.getItem("queuepilotTokens")) || [];
 
   const nextIndex = tokens.findIndex(t => t.status === "WAITING");
 
@@ -38,15 +43,18 @@ serveTokenBtn.addEventListener("click", () => {
     return;
   }
 
-  // Mark previous NOW_SERVING as COMPLETED
-  tokens.forEach(t => {
-    if (t.status === "NOW_SERVING") {
-      t.status = "COMPLETED";
-    }
-  });
+  // Mark existing NOW_SERVING as COMPLETED
+  tokens = tokens.map(t =>
+    t.status === "NOW_SERVING" ? { ...t, status: "COMPLETED" } : t
+  );
 
   // Serve next token
   tokens[nextIndex].status = "NOW_SERVING";
+
+  // Cleanup COMPLETED and CANCELLED tokens
+  tokens = tokens.filter(
+    t => t.status !== "COMPLETED" && t.status !== "CANCELLED"
+  );
 
   localStorage.setItem("queuepilotTokens", JSON.stringify(tokens));
   renderTokens();
