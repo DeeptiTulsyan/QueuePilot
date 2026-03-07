@@ -38,3 +38,46 @@ export const joinQueue = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+// ================= GET QUEUE STATUS =================
+export const getQueueStatus = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find user's token
+    const token = await Token.findOne({
+      user: userId,
+      status: { $in: ["WAITING", "NOW_SERVING"] }
+    });
+
+    if (!token) {
+      return res.json({
+        message: "User is not in queue"
+      });
+    }
+
+    // Get all waiting tokens
+    const waitingTokens = await Token.find({
+      status: "WAITING"
+    }).sort({ createdAt: 1 });
+
+    // Calculate position
+    const position = waitingTokens.findIndex(
+      t => t.tokenNumber === token.tokenNumber
+    );
+
+    const peopleAhead = position >= 0 ? position : 0;
+
+    const estimatedWait = peopleAhead * 5;
+
+    res.json({
+      tokenNumber: token.tokenNumber,
+      status: token.status,
+      peopleAhead,
+      estimatedWait
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

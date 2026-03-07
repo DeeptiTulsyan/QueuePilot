@@ -1,8 +1,9 @@
 import express from "express";
-import { joinQueue } from "../controllers/queueController.js";
+import { joinQueue, getQueueStatus } from "../controllers/queueController.js";
 
 const router = express.Router();
 
 router.post("/join", joinQueue);
+router.get("/status/:userId", getQueueStatus);
 
 export default router;
