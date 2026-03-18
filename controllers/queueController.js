@@ -3,7 +3,7 @@ import Token from "../models/Tokens.js";
 // USER JOINS QUEUE
 export const joinQueue = async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req.user._id;
 
     // check if user already has active token
     const existing = await Token.findOne({
@@ -41,7 +41,7 @@ export const joinQueue = async (req, res) => {
 // ================= GET QUEUE STATUS =================
 export const getQueueStatus = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id;
 
     // Find user's token
     const token = await Token.findOne({
