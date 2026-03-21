@@ -1,3 +1,22 @@
-node_modules
-*/node_modules
-*.env
+
+# Node modules
+node_modules/
+queuepilot-client/node_modules/
+queuepilot-server/node_modules/
+
+# Env files
+.env
+queuepilot-server/.env
+
+# Build files
+dist/
+queuepilot-client/dist/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/

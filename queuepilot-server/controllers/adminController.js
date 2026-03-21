@@ -33,3 +33,19 @@ export const serveNext = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// GET CURRENT SERVING TOKEN
+export const getCurrentToken = async (req, res) => {
+  try {
+    const current = await Token.findOne({ status: "NOW_SERVING" });
+
+    if (!current) {
+      return res.json({ tokenNumber: null });
+    }
+
+    res.json({ tokenNumber: current.tokenNumber });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
