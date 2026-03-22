@@ -119,7 +119,7 @@ export default function Home() {
 
           <div className="footer-contact">
             <h4>Contact</h4>
-            <p>Email: support@queuepilot.com</p>
+            <p>Email: deeptitulsyan01@gmail.com</p>
             <p>Phone: +91 90000 00000</p>
           </div>
 
