@@ -11,7 +11,8 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "*"
+  origin: "https://queue-pilot.vercel.app",
+  credentials: true
 }));
 app.use(express.json());
 
